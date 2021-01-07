@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "//spotichka.github.io//floor/static/css/main.8c93d6e5.chunk.css",
+    "main.css": "//spotichka.github.io//floor/static/css/main.d8f8e15c.chunk.css",
     "main.js": "//spotichka.github.io//floor/static/js/main.6650622a.chunk.js",
     "main.js.map": "//spotichka.github.io//floor/static/js/main.6650622a.chunk.js.map",
     "runtime-main.js": "//spotichka.github.io//floor/static/js/runtime-main.a1fc65d0.js",
@@ -10,13 +10,13 @@
     "static/js/3.c639f51a.chunk.js": "//spotichka.github.io//floor/static/js/3.c639f51a.chunk.js",
     "static/js/3.c639f51a.chunk.js.map": "//spotichka.github.io//floor/static/js/3.c639f51a.chunk.js.map",
     "index.html": "//spotichka.github.io//floor/index.html",
-    "static/css/main.8c93d6e5.chunk.css.map": "//spotichka.github.io//floor/static/css/main.8c93d6e5.chunk.css.map",
+    "static/css/main.d8f8e15c.chunk.css.map": "//spotichka.github.io//floor/static/css/main.d8f8e15c.chunk.css.map",
     "static/js/2.4a725960.chunk.js.LICENSE.txt": "//spotichka.github.io//floor/static/js/2.4a725960.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a1fc65d0.js",
     "static/js/2.4a725960.chunk.js",
-    "static/css/main.8c93d6e5.chunk.css",
+    "static/css/main.d8f8e15c.chunk.css",
     "static/js/main.6650622a.chunk.js"
   ]
 }
