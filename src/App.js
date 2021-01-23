@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Field from "./Field";
+import Header from "./Header";
 
 function App() {
   let [firstApartment, setFirstApartment] = useState("");
@@ -11,21 +12,38 @@ function App() {
   let [apartmentsOnFloor, setApartmentsOnFloor] = useState("");
   let [requiredFloor, setRequiredFloor] = useState("");
   let [residentalOnFirstFloor, setResidentalOnFirstFloor] = useState("");
-  //let [aprtmentsQuantity, setAprtmentsQuantity] = useState("");
   let [floorsPlan, setFloorsPlan] = useState({});
+
+  let obj = {};
+  let floorsArr = [];
 
   useEffect(() => {
     setApartmentsOnFloor(Math.ceil((lastApartment - firstApartment) / floors));
   }, [lastApartment, firstApartment, floors]);
 
   let handleSubmit = (e) => {
-    let obj = {};
-    let floorsArr = [];
+    getResult();
+    e.preventDefault();
+  };
 
+  let getResult = () => {
+    createFloorsArr();
+    createApartmetsObj();
+    Object.keys(obj).map((item) => {
+      if (obj[item].indexOf(+apartment) >= 0) {
+        return setRequiredFloor(item);
+      } else return null;
+    });
+    setFloorsPlan(obj);
+  };
+
+  let createFloorsArr = () => {
     for (let floor = 1; floor <= floors; floor++) {
       floorsArr.push(floor);
     }
+  };
 
+  let createApartmetsObj = () => {
     for (let floor of floorsArr) {
       let arr = [];
       for (let i = 1; i <= apartmentsOnFloor; i++) {
@@ -37,38 +55,28 @@ function App() {
       }
       obj[floor + " этаж"] = arr;
     }
-
-    Object.keys(obj).map((item) => {
-      if (obj[item].indexOf(+apartment) >= 0) {
-        return setRequiredFloor(item);
-      } else return null;
-    });
-
-    setFloorsPlan(obj);
-    e.preventDefault();
   };
 
   return (
     <div className="App">
       <div className="container">
+        <Header />
         <form className="form_wrapper" onSubmit={handleSubmit}>
-          <div className="fields_wrapper">
-            <div className="field_wrapper">
-              <h6>Первая квартира в подьезде</h6>
-              <Field value={firstApartment} setValue={setFirstApartment} />
-            </div>
-            <div className="field_wrapper">
-              <h6>Последняя квартира в подьезде </h6>
-              <Field value={lastApartment} setValue={setLastApartment} />
-            </div>
+          <div className="field_wrapper">
+            <h6>Номер первой квартиры в подьезде:</h6>
+            <Field value={firstApartment} setValue={setFirstApartment} />
+          </div>
+          <div className="field_wrapper">
+            <h6>Номер последней квартиры в подьезде:</h6>
+            <Field value={lastApartment} setValue={setLastApartment} />
           </div>
 
           <div className="field_wrapper">
-            <h6>Количество этажей в подьезде</h6>
+            <h6>Количество этажей в подьезде:</h6>
             <Field value={floors} setValue={setFloors} />
           </div>
           <div className="field_wrapper">
-            <h6>Номер квартиры для поиска</h6>
+            <h6>Номер квартиры для поиска:</h6>
             <Field value={apartment} setValue={setApartment} />
           </div>
 
@@ -84,14 +92,21 @@ function App() {
           </div>
           {residential && (
             <div className="field_wrapper">
-              <h6>Укажите количество нежилых квартир</h6>
+              <h6>Укажите количество нежилых квартир:</h6>
               <Field
                 value={residentalOnFirstFloor}
                 setValue={setResidentalOnFirstFloor}
               />
             </div>
           )}
-          <button>Высчитать данные</button>
+          <button
+            className={`form__btn ${
+              !firstApartment || !lastApartment || !floors ? "" : "btn_active"
+            }`}
+            disabled={!firstApartment || !lastApartment || !floors}
+          >
+            Высчитать данные
+          </button>
         </form>
       </div>
       {requiredFloor && (
@@ -128,21 +143,3 @@ function App() {
 }
 
 export default App;
-// for (let currentFloor = 1; currentFloor <= floors; currentFloor++) {
-//   let arr = [];
-
-//   let lastApartmentOnFloor =
-//     firstApartment + apartmentsOnFloor * currentFloor;
-
-//   let firstApartmentOnFloor = lastApartmentOnFloor - apartmentsOnFloor;
-
-//   for (
-//     let currentApartment = firstApartmentOnFloor || 1;
-//     currentApartment < lastApartmentOnFloor;
-//     currentApartment++
-//   ) {
-//     arr = [...arr, currentApartment];
-
-//     obj[currentFloor + " этаж"] = arr;
-//   }
-// }
