@@ -8,8 +8,8 @@ body {
   color: white;
 }
 .App {
-  border-bottom-right-radius: 32px;
-  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
   background-color: #0d0d0d;
 }
 .container {
@@ -76,6 +76,7 @@ body {
   height: 30px;
   width: 40px;
   text-align: center;
+  transition: all 1s;
 }
 .focus {
   border: 2px solid #ffffff;
@@ -97,7 +98,7 @@ h5 {
 }
 .form__btn {
   height: 30px;
-  color: white;
+  color: grey;
   font-weight: 700;
   border: none;
   border-radius: 6px;
@@ -107,7 +108,50 @@ h5 {
 .form__btn.btn_active {
   background-color: #5b6467;
   background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);
+  color: white;
   cursor: pointer;
+}
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkbox__wrapper {
+  position: relative;
+  height: 40px;
+}
+.checkmark {
+  position: absolute;
+  top: 50%;
+  right: 25%;
+  transform: translate(-25%, -50%);
+  height: 26px;
+  width: 26px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 2px solid #1e1e1e;
+  border-radius: 50%;
+  transition: all 1s;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 1s;
+}
+.checkbox__wrapper input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+.checkbox__wrapper input:checked ~ .checkmark {
+  border-color: white;
 }
 .floors_wrapper {
   max-width: 290px;

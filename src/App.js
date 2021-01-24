@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Field from "./Field";
 import Header from "./Header";
+import CustomCheckBox from "./CustomCheckBox.js";
 
 function App() {
   let [firstApartment, setFirstApartment] = useState("");
@@ -82,12 +83,9 @@ function App() {
 
           <div className="field_wrapper">
             <span> На первом этаже есть нежилые квартиры?</span>
-            <input
-              type="checkbox"
-              checked={residential}
-              onChange={() => {
-                residential ? setResidential(false) : setResidential(true);
-              }}
+            <CustomCheckBox
+              residential={residential}
+              setResidential={setResidential}
             />
           </div>
           {residential && (
