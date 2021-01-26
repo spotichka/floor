@@ -3,12 +3,23 @@ import { useEffect, useState } from "react";
 import Field from "./Field";
 import Header from "./Header";
 import CustomCheckBox from "./CustomCheckBox.js";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
+
+let useInput = (initValue) => {
+  const [value, setValue] = useState(initValue);
+
+  const onChange = (value) => setValue(value);
+
+  return { value, onChange };
+};
 
 function App() {
-  let [firstApartment, setFirstApartment] = useState("");
+  const firstApartment = useInput("");
+
+  //let [firstApartment, setFirstApartment] = useState("");
   let [lastApartment, setLastApartment] = useState("");
-  let [apartment, setApartment] = useState("");
   let [floors, setFloors] = useState("");
+  let [apartment, setApartment] = useState("");
   let [residential, setResidential] = useState(false);
   let [apartmentsOnFloor, setApartmentsOnFloor] = useState("");
   let [requiredFloor, setRequiredFloor] = useState("");
@@ -19,8 +30,10 @@ function App() {
   let floorsArr = [];
 
   useEffect(() => {
-    setApartmentsOnFloor(Math.ceil((lastApartment - firstApartment) / floors));
-  }, [lastApartment, firstApartment, floors]);
+    setApartmentsOnFloor(
+      Math.ceil((lastApartment - firstApartment.value) / floors)
+    );
+  }, [lastApartment, firstApartment.value, floors]);
 
   let handleSubmit = (e) => {
     getResult();
@@ -51,7 +64,7 @@ function App() {
         if (residential && floor === 1 && arr.length < residentalOnFirstFloor) {
           arr = [...arr, "fill"];
         } else {
-          arr = [...arr, firstApartment++];
+          arr = [...arr, firstApartment.value++];
         }
       }
       obj[floor + " этаж"] = arr;
@@ -62,10 +75,14 @@ function App() {
     <div className="App">
       <div className="container">
         <Header />
+
         <form className="form_wrapper" onSubmit={handleSubmit}>
           <div className="field_wrapper">
             <h6>Номер первой квартиры в подьезде:</h6>
-            <Field value={firstApartment} setValue={setFirstApartment} />
+            <Field
+              value={firstApartment.value}
+              setValue={firstApartment.onChange}
+            />
           </div>
           <div className="field_wrapper">
             <h6>Номер последней квартиры в подьезде:</h6>
@@ -88,7 +105,13 @@ function App() {
               setResidential={setResidential}
             />
           </div>
-          {residential && (
+          <CSSTransition
+            in={residential}
+            timeout={500}
+            classNames={"check_block"}
+            mountOnEnter
+            unmountOnExit
+          >
             <div className="field_wrapper">
               <h6>Укажите количество нежилых квартир:</h6>
               <Field
@@ -96,12 +119,14 @@ function App() {
                 setValue={setResidentalOnFirstFloor}
               />
             </div>
-          )}
+          </CSSTransition>
           <button
             className={`form__btn ${
-              !firstApartment || !lastApartment || !floors ? "" : "btn_active"
+              !firstApartment.value || !lastApartment || !floors
+                ? ""
+                : "btn_active"
             }`}
-            disabled={!firstApartment || !lastApartment || !floors}
+            disabled={!firstApartment.value || !lastApartment || !floors}
           >
             Высчитать данные
           </button>

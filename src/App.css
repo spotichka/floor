@@ -174,3 +174,28 @@ h5 {
 .floors_wrapper {
   margin-bottom: 50px;
 }
+
+.check_block-exit-active {
+  animation: note 500ms ease-out forwards;
+}
+.check_block-enter-active {
+  animation: note 500ms ease-in reverse;
+}
+@keyframes note {
+  0% {
+    transform: translateY((0));
+  }
+  25% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-44px);
+  }
+}
