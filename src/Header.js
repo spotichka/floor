@@ -8,14 +8,18 @@ const Header = () => {
   };
   return (
     <div className="header">
-      <div className="header__logo">
-        <img src={logo} alt="logo" />
-        <h1 className="header__heading">Floor Checker</h1>
-      </div>
+      <div className="container">
+        <div className="header__wrapper">
+          <div className="header__logo">
+            <img src={logo} alt="logo" />
+            <h1 className="header__heading">Floor Checker</h1>
+          </div>
 
-      <button className="header__btn" onClick={onClickHandler}>
-        <img src={refresh} alt="refresh" />
-      </button>
+          <button className="header__btn" onClick={onClickHandler}>
+            <img src={refresh} alt="refresh" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

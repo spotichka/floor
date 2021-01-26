@@ -73,9 +73,8 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <div className="container">
-        <Header />
-
         <form className="form_wrapper" onSubmit={handleSubmit}>
           <div className="field_wrapper">
             <h6>Номер первой квартиры в подьезде:</h6>
@@ -139,34 +138,47 @@ function App() {
         </form>
       </div>
       {requiredFloor && (
-        <h5>Возможно вас интересует этаж № {requiredFloor.split("этаж")} </h5>
+        <CSSTransition in={residential} timeout={500} classNames={"form__btn"}>
+          <h5>
+            Возможно вас интересует этаж &nbsp;
+            <span className="active">№ {requiredFloor.split("этаж")} </span>
+          </h5>
+        </CSSTransition>
       )}
 
-      <div className="floors_wrapper">
-        {Object.keys(floorsPlan).map((item) => {
-          return (
-            <div key={item}>
-              <span className="floors">{item}</span>
-              {floorsPlan[item].map((item) => {
-                if (apartment === item) {
-                  return (
-                    <span key={item} className="apartment active">
-                      {item}
-                    </span>
-                  );
-                } else if ("fill" === item) {
-                  return <span key={item} className="apartment"></span>;
-                }
-                return (
-                  <span key={item} className="apartment">
-                    {item}
-                  </span>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
+      <CSSTransition in={residential} timeout={500} classNames={"form__btn"}>
+        <CSSTransition
+          in={!!Object.keys(floorsPlan).length}
+          timeout={500}
+          classNames={"floors_wrapper"}
+        >
+          <div className="floors_wrapper">
+            {Object.keys(floorsPlan).map((item) => {
+              return (
+                <div key={item}>
+                  <span className="floors">{item}</span>
+                  {floorsPlan[item].map((item) => {
+                    if (apartment === item) {
+                      return (
+                        <span key={item} className="apartment active">
+                          {item}
+                        </span>
+                      );
+                    } else if ("fill" === item) {
+                      return <span key={item} className="apartment"></span>;
+                    }
+                    return (
+                      <span key={item} className="apartment">
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </CSSTransition>
+      </CSSTransition>
     </div>
   );
 }
