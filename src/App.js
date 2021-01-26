@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Field from "./Field";
 import Header from "./Header";
 import CustomCheckBox from "./CustomCheckBox.js";
-import { CSSTransition, SwitchTransition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 let useInput = (initValue) => {
   const [value, setValue] = useState(initValue);
@@ -120,16 +120,22 @@ function App() {
               />
             </div>
           </CSSTransition>
-          <button
-            className={`form__btn ${
-              !firstApartment.value || !lastApartment || !floors
-                ? ""
-                : "btn_active"
-            }`}
-            disabled={!firstApartment.value || !lastApartment || !floors}
+          <CSSTransition
+            in={residential}
+            timeout={500}
+            classNames={"form__btn"}
           >
-            Высчитать данные
-          </button>
+            <button
+              className={`form__btn ${
+                !firstApartment.value || !lastApartment || !floors
+                  ? ""
+                  : "btn_active"
+              }`}
+              disabled={!firstApartment.value || !lastApartment || !floors}
+            >
+              Высчитать данные
+            </button>
+          </CSSTransition>
         </form>
       </div>
       {requiredFloor && (

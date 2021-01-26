@@ -11,6 +11,7 @@ body {
   border-bottom-right-radius: 16px;
   border-bottom-left-radius: 16px;
   background-color: #0d0d0d;
+  height: 100vh;
 }
 .container {
   max-width: 320px;
@@ -132,7 +133,7 @@ h5 {
   background-color: rgba(255, 255, 255, 0.03);
   border: 2px solid #1e1e1e;
   border-radius: 50%;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .checkmark:after {
   content: "";
@@ -145,7 +146,7 @@ h5 {
   height: 15px;
   background-color: white;
   border-radius: 50%;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .checkbox__wrapper input:checked ~ .checkmark:after {
   opacity: 1;
@@ -174,14 +175,28 @@ h5 {
 .floors_wrapper {
   margin-bottom: 50px;
 }
+.form__btn-exit-active {
+  animation: btn 500ms ease-out forwards;
+}
+.form__btn-enter-active {
+  animation: btn 500ms ease-in reverse;
+}
+@keyframes btn {
+  0% {
+    transform: translateY((0));
+  }
 
+  100% {
+    transform: translateY(-44px);
+  }
+}
 .check_block-exit-active {
-  animation: note 500ms ease-out forwards;
+  animation: check 500ms ease-out forwards;
 }
 .check_block-enter-active {
-  animation: note 500ms ease-in reverse;
+  animation: check 500ms ease-in reverse;
 }
-@keyframes note {
+@keyframes check {
   0% {
     transform: translateY((0));
   }
